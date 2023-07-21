@@ -96,13 +96,31 @@ int strcmp(char s1[], char s2[])
     return s1[i] - s2[i];
 }
 
+// copy a string from one array to another
+void strcpy(char dst[], char src[])
+{
+    int i = 0;
+    while (src[i] != '\0')
+    {
+        dst[i] = src[i];
+        i++;
+    }
+    dst[i] = '\0';
+}
+
+#define false 0
+#define true 1
+
 int starts_with(char s1[], char s2[])
 {
     int i;
-    for (i = 0; s1[i] == s2[i]; i++)
+    for (i = 0; i < strlen(s2); i++)
     {
-        if (s1[i] == '\0')
-            return 1;
+        if (s1[i] != s2[i])
+        {
+            return false;
+        }
     }
-    return 0;
+
+    return true;
 }

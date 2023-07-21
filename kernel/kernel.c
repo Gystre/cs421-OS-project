@@ -3,6 +3,7 @@
 #include "kernel.h"
 #include "../libc/string.h"
 #include "../libc/mem.h"
+#include "filesystem.h"
 #include <stdint.h>
 
 void kernel_main()
@@ -15,6 +16,8 @@ void kernel_main()
 
     kprint("Type something, it will go through the kernel\n"
            "Type END to halt the CPU or PAGE to request a kmalloc()\n> ");
+
+    kprintf("%s what the hell? %s %d %x", "bruh", "nah", 1234567890, 0xABCD);
 }
 
 void user_input(char *input)
@@ -39,9 +42,12 @@ void user_input(char *input)
         kprint(phys_str);
         kprint("\n");
     }
-    else if (starts_with(input, "CD "))
+    else if (strcmp(input, "PWD") == 0)
     {
-        kprint("changing directory!\n");
+        // kprintf("%s what the hell? %s", "bruh", "nah");
+        // char *cwd;
+        // get_cwd(cwd);
+        // kprint(cwd);
     }
     kprint("\n> ");
 }
