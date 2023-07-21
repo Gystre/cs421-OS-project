@@ -14,10 +14,12 @@ void kernel_main()
     asm("int $2");
     asm("int $3");
 
-    kprint("Type something, it will go through the kernel\n"
-           "Type END to halt the CPU or PAGE to request a kmalloc()\n> ");
+    kprintf("%s no way is that? %s %d %x\n", "bruh", "nah", 1234567890, 0xABCD);
 
-    kprintf("%s what the hell? %s %d %x", "bruh", "nah", 1234567890, 0xABCD);
+    // create the root folder
+    init_file_system();
+
+    kprint("\n> ");
 }
 
 void user_input(char *input)
@@ -31,7 +33,7 @@ void user_input(char *input)
     {
         /* Lesson 22: Code to test kmalloc, the rest is unchanged */
         uint32_t phys_addr;
-        uint32_t page = kmalloc(1000, 1, &phys_addr);
+        uint32_t page = kmalloc_ex(1000, 1, &phys_addr);
         char page_str[16] = "";
         hex_to_ascii(page, page_str);
         char phys_str[16] = "";
@@ -44,10 +46,31 @@ void user_input(char *input)
     }
     else if (strcmp(input, "PWD") == 0)
     {
-        // kprintf("%s what the hell? %s", "bruh", "nah");
-        // char *cwd;
-        // get_cwd(cwd);
-        // kprint(cwd);
+        char *cwd;
+        get_cwd(cwd);
     }
-    kprint("\n> ");
+    else if (strcmp(input, "LS") == 0)
+    {
+        list_files();
+    }
+    else if (starts_with(input, "MKDIR"))
+    {
+        char file_name[] = "";
+        substring(input, 6, file_name);
+
+        if (strcmp(file_name, "") != 0)
+        {
+            kprintf("Creating directory %s\n", file_name);
+            create_file(file_name);
+        }
+        else
+        {
+            kprint("Please specify a directory name\n");
+        }
+    }
+    else
+    {
+        kprint("Unknown command\n");
+    }
+    kprint("> ");
 }

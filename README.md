@@ -1,6 +1,6 @@
 # cs421-OS-tutorial
 
-https://github.com/cfenollosa/os-tutorial/
+Ultra basic CLI OS with a mock filesystem based on https://github.com/cfenollosa/os-tutorial/
 
 Tested and ran in ubuntu 16.04.7
 

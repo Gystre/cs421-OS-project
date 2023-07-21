@@ -124,3 +124,24 @@ int starts_with(char s1[], char s2[])
 
     return true;
 }
+
+void substring(char *src, int startIdx, char *dst)
+{
+    int length = strlen(src);
+    int i, j;
+
+    // Check if the start index is within the bounds of the source string
+    if (startIdx >= length)
+    {
+        strcpy(dst, ""); // If startIdx is beyond the string length, return an empty string
+        return;
+    }
+
+    // Copy characters from startIdx until the end of the string
+    for (i = startIdx, j = 0; src[i] != '\0'; i++, j++)
+    {
+        dst[j] = src[i];
+    }
+
+    dst[j] = '\0'; // Null-terminate the destination string
+}

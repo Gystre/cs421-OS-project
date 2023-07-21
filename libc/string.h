@@ -9,5 +9,6 @@ void backspace(char s[]);
 void append(char s[], char n);
 int strcmp(char s1[], char s2[]);
 int starts_with(char s1[], char s2[]);
+void substring(char *src, int startIdx, char *dst);
 
 #endif
