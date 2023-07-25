@@ -1,4 +1,4 @@
-# cs421-OS-tutorial
+# cs421-OS-project
 
 Ultra basic CLI OS with a mock filesystem based on https://github.com/cfenollosa/os-tutorial/
 

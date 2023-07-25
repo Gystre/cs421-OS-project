@@ -46,8 +46,7 @@ void user_input(char *input)
     }
     else if (strcmp(input, "PWD") == 0)
     {
-        char *cwd = get_cwd();
-        kprintf("%s\n", cwd);
+        kprintf("%s\n", get_cwd());
     }
 
     // list all the other directories in the current directory
@@ -100,6 +99,45 @@ void user_input(char *input)
         else
         {
             kprint("Please specify a directory name\n");
+        }
+    }
+
+    // rename directory
+    else if (starts_with(input, "MV"))
+    {
+        char *names_with_space = substring(input, 3);
+
+        char *old_name = (char *)kmalloc(256 * sizeof(char));
+        // keep adding the characters to the old_name until we hit a space
+        int i = 0;
+        while (names_with_space[i] != ' ')
+        {
+            old_name[i] = names_with_space[i];
+            i++;
+        }
+
+        // pick up where we left off for the new name
+        char *new_name = (char *)kmalloc(256 * sizeof(char));
+        int j = 0;
+        i++; // skip the space
+        while (names_with_space[i] != '\0')
+        {
+            new_name[j] = names_with_space[i];
+            i++;
+            j++;
+        }
+
+        if (strcmp(old_name, "") == 0)
+        {
+            kprintf("Please specify a directory name\n");
+        }
+        else if (strcmp(new_name, "") == 0)
+        {
+            kprintf("Please specify a new directory name\n");
+        }
+        else
+        {
+            rename_file(old_name, new_name);
         }
     }
     else

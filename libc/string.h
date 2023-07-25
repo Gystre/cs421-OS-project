@@ -13,7 +13,5 @@ void strcat(char dst[], char src[]);
 int strcmp(char s1[], char s2[]);
 bool starts_with(char s1[], char s2[]);
 char *substring(char *src, int startIdx);
-char *strtok(char *src, char *dst, char *delim);
-char *strrchr(char *str, char character);
 
 #endif

@@ -153,7 +153,6 @@ char *get_cwd()
 void delete_file(const char *file_name)
 {
 	// find the file in the root's children
-	bool found = false;
 	struct FileNode *current = root->children;
 	struct FileNode *prev = NULL;
 	while (current)
@@ -174,15 +173,31 @@ void delete_file(const char *file_name)
 			// kfree(current);
 
 			kprintf("Deleted %s\n", file_name);
-			found = true;
-			break;
+			return;
 		}
 		prev = current;
 		current = current->sibling;
 	}
 
-	if (!found)
-		kprintf("Couldn't find %s\n", file_name);
+	kprintf("Couldn't find %s\n", file_name);
+}
+
+void rename_file(const char *old_name, const char *new_name)
+{
+	// find the old file in the children
+	struct FileNode *current = root->children;
+	while (current)
+	{
+		if (strcmp(current->name, old_name) == 0)
+		{
+			strcpy(current->name, new_name);
+			kprintf("Renamed %s to %s\n", old_name, new_name);
+			return;
+		}
+		current = current->sibling;
+	}
+
+	kprintf("Couldn't find %s\n", old_name);
 }
 
 void init_file_system()
