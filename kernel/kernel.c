@@ -14,7 +14,7 @@ void kernel_main()
     asm("int $2");
     asm("int $3");
 
-    kprintf("%s no way is that? %s %d %x\n", "bruh", "nah", 1234567890, 0xABCD);
+    kprintf("uwu nya :3 %s %d %x\n", "bruh", 1234567890, 0xABCD);
 
     // create the root folder
     init_file_system();
