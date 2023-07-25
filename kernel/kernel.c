@@ -46,17 +46,20 @@ void user_input(char *input)
     }
     else if (strcmp(input, "PWD") == 0)
     {
-        char *cwd;
-        get_cwd(cwd);
+        char *cwd = get_cwd();
+        kprintf("%s\n", cwd);
     }
+
+    // list all the other directories in the current directory
     else if (strcmp(input, "LS") == 0)
     {
         list_files();
     }
+
+    // create a directory
     else if (starts_with(input, "MKDIR"))
     {
-        char file_name[] = "";
-        substring(input, 6, file_name);
+        char *file_name = substring(input, 6);
 
         if (strcmp(file_name, "") != 0)
         {
@@ -68,9 +71,25 @@ void user_input(char *input)
             kprint("Please specify a directory name\n");
         }
     }
+
+    // change directory
+    else if (starts_with(input, "CD"))
+    {
+
+        char *file_name = substring(input, 3);
+
+        if (strcmp(file_name, "") != 0)
+        {
+            change_directory(file_name);
+        }
+        else
+        {
+            kprint("Please specify a directory name\n");
+        }
+    }
     else
     {
-        kprint("Unknown command\n");
+        kprint("Unknown command :(\n");
     }
     kprint("> ");
 }
