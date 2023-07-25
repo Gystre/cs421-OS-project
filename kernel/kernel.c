@@ -87,6 +87,21 @@ void user_input(char *input)
             kprint("Please specify a directory name\n");
         }
     }
+
+    // delete directory
+    else if (starts_with(input, "RM"))
+    {
+        char *file_name = substring(input, 3);
+
+        if (strcmp(file_name, "") != 0)
+        {
+            delete_file(file_name);
+        }
+        else
+        {
+            kprint("Please specify a directory name\n");
+        }
+    }
     else
     {
         kprint("Unknown command :(\n");

@@ -150,6 +150,41 @@ char *get_cwd()
 	return cwd;
 }
 
+void delete_file(const char *file_name)
+{
+	// find the file in the root's children
+	bool found = false;
+	struct FileNode *current = root->children;
+	struct FileNode *prev = NULL;
+	while (current)
+	{
+		if (strcmp(current->name, file_name) == 0)
+		{
+			if (prev)
+			{
+				prev->sibling = current->sibling;
+			}
+			else
+			{
+				root->children = current->sibling;
+			}
+
+			// no kfree implemented LOL
+			// memory yummy
+			// kfree(current);
+
+			kprintf("Deleted %s\n", file_name);
+			found = true;
+			break;
+		}
+		prev = current;
+		current = current->sibling;
+	}
+
+	if (!found)
+		kprintf("Couldn't find %s\n", file_name);
+}
+
 void init_file_system()
 {
 	// create the root folder
