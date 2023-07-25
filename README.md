@@ -19,4 +19,4 @@ In a linux terminal type: `qemu-system-i386 -fda os-image.bin`
 
 ## Picture
 
-![Screenshot of My Project](https://raw.githubusercontent.com/Gystre/cs421-OS-project/main/Screenshot%202023-07-24%20173326.png)
+![Screenshot of My Project](https://raw.githubusercontent.com/Gystre/cs421-OS-project/main/Screenshot%202023-07-24%20175642.png)
